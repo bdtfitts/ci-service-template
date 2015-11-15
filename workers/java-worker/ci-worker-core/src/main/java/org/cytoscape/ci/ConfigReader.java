@@ -61,6 +61,7 @@ public class ConfigReader {
 		final Integer numInstances = Integer.parseInt(configMap.get(
 				NUM_INSTANCES).toString());
 		final String workerType = configMap.get(WORKER_TYPE).toString();
+		System.out.println("Generating instances of worker type " + workerType);
 
 		final List<BaseWorker> workers = new ArrayList<>();
 		for (int i = 0; i < numInstances; i++) {

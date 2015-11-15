@@ -20,7 +20,6 @@
 		<connection>scm:https://github.com/idekerlab/ci-service-template.git</connection>
 		<developerConnection>scm:git@github.com:idekerlab/ci-service-template.git</developerConnection>
 	</scm>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -71,6 +70,11 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.cxio</groupId>
+			<artifactId>cxio</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.zeromq</groupId>
 			<artifactId>jzmq</artifactId>

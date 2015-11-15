@@ -30,6 +30,39 @@ hello:
       description: Greeting message
       required: true
 
+layout:
+  endpoint: layout
+  description: Java worker to generate cartesian coordinates
+  worker: org.cytoscape.ci.worker.layout.LayoutWorker
+  instances: 3
+  servers:
+    task_queue:
+      location: service
+      port: 5563
+    collector:
+      location: collector
+      port: 5558
+    monitor:
+      location: collector
+      port: 6666
+    redis:
+      location: redis
+      port: 6379
+    result:
+      location: resultserver
+      port: 3000
+    datacache:
+      location: dataserver
+      port: 3000
+  parameters:
+    - name: network
+      type: string
+      description: Network to which the layout is applied
+      required: true
+    - name: algorithm
+      type: string
+      description: Type of layout algorithm to be applied
+      required: true
 nbs:
   endpoint: nbs
   description: NBS worker sample

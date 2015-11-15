@@ -28,9 +28,10 @@ RUN mkdir /worker
 WORKDIR /worker
 COPY . /worker
 
-EXPOSE 5556 5557 5558 5560 5561
+EXPOSE 5556 5557 5558 5560 5561 5563
 
 # Set path to JRE 8
+RUN mvn clean install:install-file -Dfile=./jars/cxio-0.0.1.jar -DgroupId=org.cxio -DartifactId=cxio -Dversion=0.0.1 -Dpackaging=jar
 RUN mvn clean compile assembly:single
 
 CMD ["./run.sh"]
