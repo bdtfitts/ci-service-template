@@ -9,7 +9,6 @@ import java.util.Map;
 import org.cytoscape.ci.service.LayoutService;
 import org.cytoscape.ci.worker.BaseWorker;
 import org.cytoscape.ci.worker.layout.LayoutInput;
-import org.cytoscape.ci.worker.layout.LayoutResult;
 
 /**
  * Sample Worker 1: HelloWorker
@@ -25,20 +24,20 @@ public class LayoutWorker extends BaseWorker {
 		@SuppressWarnings("unchecked")
 		
 		final LayoutInput inputParams = mapper.readValue(rawData, LayoutInput.class);
-		final LayoutResult result = new LayoutResult();
+
 		String inputNetwork = inputParams.network;
 		String algorithm = inputParams.algorithm;
+
 		System.out.println(String.format("Applying layout %s to network %s", algorithm, inputNetwork));
+
 		byte[] inputNetworkAsBytes = inputNetwork.getBytes();
 		InputStream inputNetworkAsStream = new ByteArrayInputStream(inputNetworkAsBytes);
-		ByteArrayOutputStream cartesianLayout = LayoutService.run(inputNetworkAsStream, algorithm);
-		String cartesianOutput = cartesianLayout.toString();
-		result.result = cartesianOutput;
 
-		// Sleep to emulate long running task...
-		Thread.sleep(5000);
-		
+		ByteArrayOutputStream cartesianLayout = LayoutService.run(inputNetworkAsStream, algorithm);
+
+		String cartesianOutput = cartesianLayout.toString();
+
 		// Return message as a serialized JSON
-		return mapper.writeValueAsString(result);
+		return String.format("{'result' = '%s'}", cartesianOutput);
 	}
 }

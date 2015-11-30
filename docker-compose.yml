@@ -71,24 +71,24 @@ kernelserver:
 
 # Workers
 
-heatdiff:
-  build: workers/python-worker/heat-diffusion
-  links:
-    - service
-    - collector
-    - redis
-    - dataserver
-    - resultserver
-    - kernelserver
+#heatdiff:
+#  build: workers/python-worker/heat-diffusion
+#  links:
+#    - service
+#    - collector
+#    - redis
+#    - dataserver
+#    - resultserver
+#    - kernelserver
 
-hello:
-  build: workers/python-worker/hello
-  links:
-    - service
-    - collector
-    - redis
-    - dataserver
-    - resultserver
+#hello:
+#  build: workers/python-worker/hello
+#  links:
+#    - service
+#    - collector
+#    - redis
+#    - dataserver
+#    - resultserver
 
 
 # Sample Java workers
@@ -102,12 +102,12 @@ java:
     - resultserver
 
 # Frontend to test CI
-#notebook:
-#  image: idekerlab/vizbi-2015
-#  ports:
-#    - "8080:8888"
-#  volumes:
-#    - sample-notebooks:/notebooks
-#  environment:
-#    - PASSWORD=citest
-#    - USE_HTTP=1
+notebook:
+  image: idekerlab/vizbi-2015
+  ports:
+    - "8080:8888"
+  volumes:
+    - sample-notebooks:/notebooks
+  environment:
+    - PASSWORD=citest
+    - USE_HTTP=1

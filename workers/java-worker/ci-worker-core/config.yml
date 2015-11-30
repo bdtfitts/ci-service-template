@@ -1,34 +1,34 @@
 # Sample worker definition: HelloWorker
 
-hello:
-  endpoint: hello-java
-  description: Sample Java worker to display greeting message
-  worker: org.cytoscape.ci.worker.hello.HelloWorker
-  instances: 3
-  servers:
-    task_queue:
-      location: service
-      port: 5560
-    collector:
-      location: collector
-      port: 5558
-    monitor:
-      location: collector
-      port: 6666
-    redis:
-      location: redis
-      port: 6379
-    result:
-      location: resultserver
-      port: 3000
-    datacache:
-      location: dataserver
-      port: 3000
-  parameters:
-    - name: message
-      type: string
-      description: Greeting message
-      required: true
+#hello:
+#  endpoint: hello-java
+#  description: Sample Java worker to display greeting message
+#  worker: org.cytoscape.ci.worker.hello.HelloWorker
+#  instances: 3
+#  servers:
+#    task_queue:
+#      location: service
+#      port: 5560
+#    collector:
+#      location: collector
+#      port: 5558
+#    monitor:
+#      location: collector
+#      port: 6666
+#    redis:
+#      location: redis
+#      port: 6379
+#    result:
+#      location: resultserver
+#      port: 3000
+#    datacache:
+#      location: dataserver
+#      port: 3000
+#  parameters:
+#    - name: message
+#      type: string
+#      description: Greeting message
+#      required: true
 
 layout:
   endpoint: layout
@@ -63,32 +63,32 @@ layout:
       type: string
       description: Type of layout algorithm to be applied
       required: true
-nbs:
-  endpoint: nbs
-  description: NBS worker sample
-  worker: org.cytoscape.ci.worker.nbs.NBSWorker
-  instances: 3
-  servers:
-    task_queue:
-      location: service
-      port: 5561
-    collector:
-      location: collector
-      port: 5558
-    monitor:
-      location: collector
-      port: 6666
-    redis:
-      location: redis
-      port: 6379
-    result:
-      location: resultserver
-      port: 3000
-    datacache:
-      location: dataserver
-      port: 3000
-  parameters:
-    - name: inputFile
-      type: string
-      description: Input file location
-      required: true
+#nbs:
+#  endpoint: nbs
+#  description: NBS worker sample
+#  worker: org.cytoscape.ci.worker.nbs.NBSWorker
+#  instances: 3
+#  servers:
+#    task_queue:
+#      location: service
+#      port: 5561
+#    collector:
+#      location: collector
+#      port: 5558
+#    monitor:
+#      location: collector
+#      port: 6666
+#    redis:
+#      location: redis
+#      port: 6379
+#    result:
+#      location: resultserver
+#      port: 3000
+#    datacache:
+#      location: dataserver
+#      port: 3000
+#  parameters:
+#    - name: inputFile
+#      type: string
+#      description: Input file location
+#      required: true
