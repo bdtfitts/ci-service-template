@@ -3,6 +3,7 @@ package org.cytoscape.ci.service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashSet;
 
 import org.cxio.aspects.readers.CyVisualPropertiesFragmentReader;
@@ -25,7 +26,7 @@ public class LayoutService {
 	private static void applyLayout(LayoutAlgorithm layout) throws IOException {
 		layout.apply();
 	}
-	public static ByteArrayOutputStream run(InputStream cxInput, String algorithm) {
+	public static OutputStream run(InputStream cxInput, String algorithm) {
 
 		ByteArrayOutputStream cartesianLayout = new ByteArrayOutputStream();
 		
@@ -35,11 +36,11 @@ public class LayoutService {
 		CartesianLayoutFragmentWriter cartesianFragmentWriter = CartesianLayoutFragmentWriter.createInstance();
 
 		//Prepare AspectFragmentWriter for bundling into CxReader object
-		HashSet<AspectFragmentWriter> writer = new HashSet(1);
+		HashSet<AspectFragmentWriter> writer = new HashSet<AspectFragmentWriter>(1);
 		writer.add(cartesianFragmentWriter);
 
 		//Prepare AspectFragmentReaders for bundling into CxReader object
-		HashSet<AspectFragmentReader> readers = new HashSet(2);
+		HashSet<AspectFragmentReader> readers = new HashSet<AspectFragmentReader>(2);
 		readers.add(nodesFragmentReader);
 		readers.add(edgesFragmentReader);
 
@@ -47,9 +48,12 @@ public class LayoutService {
 			CxReader cxReader;
 			CxWriter cxWriter = CxWriter.createInstance(cartesianLayout, true, writer);
 			System.out.println("Applying layout...");
+			if (algorithm == null) {
+				algorithm = "null";
+			}
 			switch (algorithm) {
 				case GRID_LAYOUT: {
-					System.out.println("Creating cxReader...");
+					System.out.println("Grid layout");
 					cxReader = CxReader.createInstance(cxInput, readers);
 					cxWriter.start();
 					try {
@@ -61,6 +65,7 @@ public class LayoutService {
 					break;
 				}
 				case STACKED_LAYOUT: {
+					System.out.println("Stacked Node layout");
 					CyVisualPropertiesFragmentReader vizPropFragmentReader = CyVisualPropertiesFragmentReader.createInstance();
 					readers.add(vizPropFragmentReader);
 					cxReader = CxReader.createInstance(cxInput, readers);
@@ -74,6 +79,7 @@ public class LayoutService {
 					break;
 				}
 				default: {
+					System.out.println("incompatible layout");
 					cxWriter.start();
 					cxWriter.end(true, "Unable to create layout in accordance to given algorithm");
 					break;

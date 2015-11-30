@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//ciservice/apiv1/queue/register_port.py=utf-8
+encoding//ciservice/apiv1/resource_services.py=utf-8
+encoding//ciservice/apiv1/resource_upload.py=utf-8
+encoding//ciservice/apiv1/resource_version.py=utf-8
+encoding//ciservice/apiv1/util_service.py=utf-8
+encoding//workers/python-worker/hello/start_worker.py=utf-8

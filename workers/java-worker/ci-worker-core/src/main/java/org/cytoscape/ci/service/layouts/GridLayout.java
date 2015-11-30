@@ -40,6 +40,7 @@ public class GridLayout extends AbstractLayout {
 		// performance.
 		System.out.println("Writing cartesian coordinates");
 		for (final NodesElement node : nodesToLayOut) {
+			System.out.println(String.format("Writing id:%s, x:%f, y:%f", node.getId(), currX, currY));
 			CartesianLayoutElement nodeLayoutElement = new CartesianLayoutElement(node.getId(), currX, currY);
 			cxLayoutWriter.writeAspectElement(nodeLayoutElement);
 

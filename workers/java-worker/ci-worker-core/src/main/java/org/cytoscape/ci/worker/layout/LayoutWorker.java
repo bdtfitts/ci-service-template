@@ -1,8 +1,8 @@
 package org.cytoscape.ci.worker.layout;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,11 +33,11 @@ public class LayoutWorker extends BaseWorker {
 		byte[] inputNetworkAsBytes = inputNetwork.getBytes();
 		InputStream inputNetworkAsStream = new ByteArrayInputStream(inputNetworkAsBytes);
 
-		ByteArrayOutputStream cartesianLayout = LayoutService.run(inputNetworkAsStream, algorithm);
+		OutputStream cartesianLayout = LayoutService.run(inputNetworkAsStream, algorithm);
 
 		String cartesianOutput = cartesianLayout.toString();
 
 		// Return message as a serialized JSON
-		return String.format("{'result' = '%s'}", cartesianOutput);
+		return String.format("{\"result\" :  \"%s\"}", cartesianOutput);
 	}
 }

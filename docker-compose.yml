@@ -105,7 +105,7 @@ java:
 notebook:
   image: idekerlab/vizbi-2015
   ports:
-    - "8080:8888"
+    - "9997:8888"
   volumes:
     - sample-notebooks:/notebooks
   environment:
