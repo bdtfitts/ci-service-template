@@ -44,7 +44,6 @@ public class StackedNodeLayout extends AbstractLayout {
 			}
 			cxLayoutWriter.writeAspectElement(nodeLayoutElement);
 			
-			//TODO Retrieve node height from visualProperties aspect for spacing
 			y += actualHeight * 2;
 		}
 		finishLayout();

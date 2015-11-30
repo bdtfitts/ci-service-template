@@ -38,9 +38,8 @@ public class GridLayout extends AbstractLayout {
 		// Set visual property.
 		// TODO: We need batch apply method for Visual Property values for
 		// performance.
-		System.out.println("Writing cartesian coordinates");
+		//System.out.println("Writing cartesian coordinates");
 		for (final NodesElement node : nodesToLayOut) {
-			System.out.println(String.format("Writing id:%s, x:%f, y:%f", node.getId(), currX, currY));
 			CartesianLayoutElement nodeLayoutElement = new CartesianLayoutElement(node.getId(), currX, currY);
 			cxLayoutWriter.writeAspectElement(nodeLayoutElement);
 
@@ -59,7 +58,7 @@ public class GridLayout extends AbstractLayout {
 
 	@Override
 	protected void parseInput() throws IOException {
-		System.out.println("GridLayout: Parsing input");
+		//System.out.println("GridLayout: Parsing input");
 		ArrayList<NodesElement> nodes = new ArrayList<NodesElement>();
 		while (cxNodeReader.hasNext()) {
 			List<AspectElement> aspectElements = cxNodeReader.getNext();

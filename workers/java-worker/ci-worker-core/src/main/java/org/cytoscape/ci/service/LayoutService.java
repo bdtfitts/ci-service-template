@@ -47,13 +47,13 @@ public class LayoutService {
 		try {
 			CxReader cxReader;
 			CxWriter cxWriter = CxWriter.createInstance(cartesianLayout, true, writer);
-			System.out.println("Applying layout...");
+			//System.out.println("Applying layout...");
 			if (algorithm == null) {
 				algorithm = "null";
 			}
 			switch (algorithm) {
 				case GRID_LAYOUT: {
-					System.out.println("Grid layout");
+					//System.out.println("Grid layout");
 					cxReader = CxReader.createInstance(cxInput, readers);
 					cxWriter.start();
 					try {
@@ -65,7 +65,7 @@ public class LayoutService {
 					break;
 				}
 				case STACKED_LAYOUT: {
-					System.out.println("Stacked Node layout");
+					//System.out.println("Stacked Node layout");
 					CyVisualPropertiesFragmentReader vizPropFragmentReader = CyVisualPropertiesFragmentReader.createInstance();
 					readers.add(vizPropFragmentReader);
 					cxReader = CxReader.createInstance(cxInput, readers);
@@ -79,16 +79,15 @@ public class LayoutService {
 					break;
 				}
 				default: {
-					System.out.println("incompatible layout");
+					//System.out.println("incompatible layout");
 					cxWriter.start();
 					cxWriter.end(true, "Unable to create layout in accordance to given algorithm");
 					break;
 				}
 			}
+			return cartesianLayout;
 		} catch (IOException e) {
 			throw new RuntimeException("Unable to create CX Readers and/or Writers");
-		} finally {
-			return cartesianLayout;
 		}
 	}
 }

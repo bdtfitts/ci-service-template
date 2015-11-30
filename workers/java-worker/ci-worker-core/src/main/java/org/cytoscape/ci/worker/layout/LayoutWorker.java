@@ -28,7 +28,7 @@ public class LayoutWorker extends BaseWorker {
 		String inputNetwork = inputParams.network;
 		String algorithm = inputParams.algorithm;
 
-		System.out.println(String.format("Applying layout %s to network %s", algorithm, inputNetwork));
+		//System.out.println(String.format("Applying layout %s to network %s", algorithm, inputNetwork));
 
 		byte[] inputNetworkAsBytes = inputNetwork.getBytes();
 		InputStream inputNetworkAsStream = new ByteArrayInputStream(inputNetworkAsBytes);
