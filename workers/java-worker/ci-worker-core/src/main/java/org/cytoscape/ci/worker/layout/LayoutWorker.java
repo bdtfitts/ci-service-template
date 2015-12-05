@@ -30,10 +30,7 @@ public class LayoutWorker extends BaseWorker {
 
 		//System.out.println(String.format("Applying layout %s to network %s", algorithm, inputNetwork));
 
-		byte[] inputNetworkAsBytes = inputNetwork.getBytes();
-		InputStream inputNetworkAsStream = new ByteArrayInputStream(inputNetworkAsBytes);
-
-		OutputStream cartesianLayout = LayoutService.run(inputNetworkAsStream, algorithm);
+		OutputStream cartesianLayout = LayoutService.run(inputNetwork, algorithm);
 
 		String cartesianOutput = cartesianLayout.toString();
 

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashSet;
 
+import org.cxio.aspects.datamodels.CartesianLayoutElement;
 import org.cxio.aspects.readers.CyVisualPropertiesFragmentReader;
 import org.cxio.aspects.readers.EdgesFragmentReader;
 import org.cxio.aspects.readers.NodesFragmentReader;
@@ -14,6 +15,7 @@ import org.cxio.core.CxReader;
 import org.cxio.core.CxWriter;
 import org.cxio.core.interfaces.AspectFragmentReader;
 import org.cxio.core.interfaces.AspectFragmentWriter;
+import org.cxio.metadata.MetaDataCollection;
 import org.cytoscape.ci.service.layouts.GridLayout;
 import org.cytoscape.ci.service.layouts.LayoutAlgorithm;
 import org.cytoscape.ci.service.layouts.StackedNodeLayout;
@@ -23,10 +25,10 @@ public class LayoutService {
 	private static final String GRID_LAYOUT = "grid";
 	private static final String STACKED_LAYOUT = "stacked";
 
-	private static void applyLayout(LayoutAlgorithm layout) throws IOException {
-		layout.apply();
+	private static void applyLayout(LayoutAlgorithm layout, MetaDataCollection postLayoutMetadata) throws IOException {
+		layout.apply(postLayoutMetadata);
 	}
-	public static OutputStream run(InputStream cxInput, String algorithm) {
+	public static OutputStream run(String cxInput, String algorithm) {
 
 		ByteArrayOutputStream cartesianLayout = new ByteArrayOutputStream();
 		
@@ -46,7 +48,15 @@ public class LayoutService {
 
 		try {
 			CxReader cxReader;
-			CxWriter cxWriter = CxWriter.createInstance(cartesianLayout, true, writer);
+			CxWriter cxWriter = CxWriter.createInstance(cartesianLayout, false, writer);
+			
+			//Creating metadata
+			MetaDataCollection preLayoutMetadata = new MetaDataCollection();
+			preLayoutMetadata.setVersion(CartesianLayoutElement.ASPECT_NAME, "1.0");
+			preLayoutMetadata.setConsistencyGroup(CartesianLayoutElement.ASPECT_NAME, (long) 1);
+			cxWriter.addPreMetaData(preLayoutMetadata);
+			
+			MetaDataCollection postLayoutMetadata = new MetaDataCollection();
 			//System.out.println("Applying layout...");
 			if (algorithm == null) {
 				algorithm = "null";
@@ -57,7 +67,7 @@ public class LayoutService {
 					cxReader = CxReader.createInstance(cxInput, readers);
 					cxWriter.start();
 					try {
-						applyLayout(new GridLayout(cxReader, cxWriter));
+						applyLayout(new GridLayout(cxReader, cxWriter), postLayoutMetadata);
 						cxWriter.end(true, "Applied GridLayout to network");
 					} catch (IOException e) {
 						cxWriter.end(false, "Error when writing to file. " + e.getMessage());
@@ -71,7 +81,7 @@ public class LayoutService {
 					cxReader = CxReader.createInstance(cxInput, readers);
 					cxWriter.start();
 					try {
-						applyLayout(new StackedNodeLayout(cxReader, cxWriter));
+						applyLayout(new StackedNodeLayout(cxReader, cxWriter), postLayoutMetadata);
 						cxWriter.end(true, "Applied StackedNodeLayout to network");
 					} catch (IOException e) {
 						cxWriter.end(false, "Error when writing to file. " + e.getMessage());

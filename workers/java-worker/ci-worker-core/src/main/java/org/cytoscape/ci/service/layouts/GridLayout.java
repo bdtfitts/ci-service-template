@@ -9,6 +9,7 @@ import org.cxio.aspects.datamodels.NodesElement;
 import org.cxio.core.CxReader;
 import org.cxio.core.CxWriter;
 import org.cxio.core.interfaces.AspectElement;
+import org.cxio.metadata.MetaDataCollection;
 
 public class GridLayout extends AbstractLayout {
 
@@ -23,7 +24,7 @@ public class GridLayout extends AbstractLayout {
 	}
 
 	@Override
-	public void apply() throws IOException {
+	public void apply(MetaDataCollection postLayoutMetadata) throws IOException {
 		startLayout();
 		double currX = 0.0d;
 		double currY = 0.0d;
@@ -38,7 +39,6 @@ public class GridLayout extends AbstractLayout {
 		// Set visual property.
 		// TODO: We need batch apply method for Visual Property values for
 		// performance.
-		//System.out.println("Writing cartesian coordinates");
 		for (final NodesElement node : nodesToLayOut) {
 			CartesianLayoutElement nodeLayoutElement = new CartesianLayoutElement(node.getId(), currX, currY);
 			cxLayoutWriter.writeAspectElement(nodeLayoutElement);
@@ -54,11 +54,13 @@ public class GridLayout extends AbstractLayout {
 			}
 		}
 		finishLayout();
+
+		postLayoutMetadata.setElementCount(CartesianLayoutElement.ASPECT_NAME, (long) nodesToLayOut.size());
+		cxLayoutWriter.addPostMetaData(postLayoutMetadata);
 	}
 
 	@Override
 	protected void parseInput() throws IOException {
-		//System.out.println("GridLayout: Parsing input");
 		ArrayList<NodesElement> nodes = new ArrayList<NodesElement>();
 		while (cxNodeReader.hasNext()) {
 			List<AspectElement> aspectElements = cxNodeReader.getNext();
