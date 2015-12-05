@@ -11,7 +11,7 @@ import org.cytoscape.ci.worker.BaseWorker;
 import org.cytoscape.ci.worker.layout.LayoutInput;
 
 /**
- * Sample Worker 1: HelloWorker
+ * Sample Worker 1: LayoutWorker
  * 
  *  - Simply pass through given message from the service.
  *
