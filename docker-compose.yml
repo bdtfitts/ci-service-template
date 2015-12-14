@@ -107,7 +107,7 @@ notebook:
   ports:
     - "9997:8888"
   volumes:
-    - sample-notebooks:/notebooks
+    - ./sample-notebooks:/notebooks
   environment:
     - PASSWORD=citest
     - USE_HTTP=1

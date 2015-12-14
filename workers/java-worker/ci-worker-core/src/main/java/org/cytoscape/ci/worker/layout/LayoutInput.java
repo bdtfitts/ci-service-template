@@ -1,9 +1,11 @@
 package org.cytoscape.ci.worker.layout;
 
 /**
- * Jackson data mapping for Layout parameters
- * @author braxton
+ * LayoutInput
+ * @author Braxton Fitts
+ * @author Ziran Zhang
  *
+ * This class is used for Jackson data mapping of the input
  */
 public class LayoutInput {
 	public String network;

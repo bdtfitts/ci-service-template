@@ -11,9 +11,11 @@ import org.cytoscape.ci.worker.BaseWorker;
 import org.cytoscape.ci.worker.layout.LayoutInput;
 
 /**
- * Sample Worker 1: LayoutWorker
+ * LayoutWorker
+ * @author Braxton Fitts
  * 
- *  - Simply pass through given message from the service.
+ * This class is the worker used to bridge the CI-Layouts service code
+ * to the Cytoscape CI.
  *
  */
 public class LayoutWorker extends BaseWorker {
